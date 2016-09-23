@@ -1,23 +1,17 @@
-// App root
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
-import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
-import App from './components/App';
-import Featured from './components/Featured'
-import Settings from './pages/Settings'
+import Todos from "./pages/Todos";
+import Layout from "./pages/Layout";
 
-// ReactDOM.render(<App />,document.getElementById('app'));
+ReactDOM.render(<Layout />,document.getElementById('app'));
 
-const app = document.getElementById('app');
 ReactDOM.render(
-  //routes
-  <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Featured}></IndexRoute>
-        <Route path="settings" component={Settings}></Route>
-      </Route>
+  <Router history={hashHistory}>
+    <Route path="/" component={Layout}>
+      <IndexRoute component={Todos}></IndexRoute>
+    </Route>
   </Router>,
 app);
