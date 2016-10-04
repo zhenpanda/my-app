@@ -6,15 +6,20 @@ import * as TodoActions from "../actions/TodoActions";
 
 
 export default class Featured extends React.Component {
+  // init when Feature is run
   constructor() {
     super();
+    // grab the data
+    console.log("start loading the page")
     this.getTodos = this.getTodos.bind(this);
     // loading in the data
     this.state = {todos: TodoStore.getAll()}
+    console.log(this.state)
   }
 
   // loading in things the first time the componet is being loaded
   componentWillMount() {
+    // component action on change
     TodoStore.on("change", this.getTodos)
   }
   // unmount the listener
@@ -22,24 +27,31 @@ export default class Featured extends React.Component {
     TodoStore.removeListener("change", this.getTodos)
   }
 
+  // grab all the data from store
   getTodos() {
+    console.log("grabing all data from store now...")
     this.setState({
       todos: TodoStore.getAll()
     })
+    console.log(this.state, "current state after getTodos", this)
   }
 
-  createTodo() {
-      TodoActions.createTodo(Date.now())
-  }
-
+  // reload all data
   reloadTodos() {
     TodoActions.reloadTodos()
   }
+  // create Todo
+  createTodo() {
+    console.log("createTodo called! passing in dummy data");
+    // TodoActions.createTodo(Date.now())
+    TodoActions.createTodo("Dummy Text");
+  }
 
   render() {
-    const { todos } = this.state;
-
-    const TodoComponents = todos.map((todo) => {
+    console.log(this.state, "current state", this)
+    let { todos } = this.state;
+    console.log({ todos }, "current todos obj", this)
+    let TodoComponents = todos.map((todo) => {
         return <Todo key={todo.id} {...todo}/>;
     });
 
