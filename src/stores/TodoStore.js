@@ -1,5 +1,4 @@
 // objects and data
-
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
 
@@ -22,7 +21,7 @@ class TodoStore extends EventEmitter {
 
   // action TodoStore calls
   createTodo(text) {
-    console.log("create todo called in stores")
+    // console.log("create todo called in stores")
     const id = Date.now();
 
     this.todos.push({
@@ -31,7 +30,7 @@ class TodoStore extends EventEmitter {
       complete: false,
     })
     this.emit("change");
-    console.log(this.todos, "todo data");
+    // console.log(this.todos, "todo data");
   }
 
   getAll() {
